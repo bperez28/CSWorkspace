@@ -2,7 +2,9 @@ import objectsPosition
 import finder
 from graphics import *
 
+
 def main():
+    loop=0
     block_size=20
     screen_width=500
     screen_height=500
@@ -11,12 +13,36 @@ def main():
     win = GraphWin("Path Finder",screen_width,screen_height)
     win.setBackground('white')
     for i in range(len(gameboard)):
-        for j in range(len(gameboard[i])):
-            if gameboard[i][j]==0:
-                rec=Rectangle(Point(0+(block_size*j),0+(block_size*i)),Point(block_size+(block_size*j),block_size+(block_size*i)))
-                rec.draw(win)
+            for j in range(len(gameboard[i])):
+                if gameboard[i][j]==0:
+                    rec=Rectangle(Point(0+(block_size*j),0+(block_size*i)),Point(block_size+(block_size*j),block_size+(block_size*i)))
+                    rec.draw(win)
+                if gameboard[i][j]==1:
+                    rec=Rectangle(Point(0+(block_size*j),0+(block_size*i)),Point(block_size+(block_size*j),block_size+(block_size*i)))
+                    rec.setFill('black')
+                    rec.draw(win)
 
-    win.getMouse()
+    # while loop to keep program running
+    while win.isOpen():
+        print("runnning game")  
+        '''mouse clicks on the screen give back coordinates used
+        for making walls,start and end point'''        
+        coordinate = win.checkMouse()
+        while coordinate == None:
+            coordinate = win.checkMouse()
+        print(coordinate)
+        j=int(round((coordinate.getX() / block_size)-0.3))
+        i=int(round((coordinate.getY() / block_size)-0.3))
+        print(j)
+        print(i)
+        if coordinate != None:
+            '''making wall'''
+            gameboard[i][j]=1
+            rec=Rectangle(Point(0+(block_size*j),0+(block_size*i)),Point(block_size+(block_size*j),block_size+(block_size*i)))
+            rec.setFill('black')
+            rec.draw(win)
+        
+        
 
-    win.close()
+    # win.close()
 main()

@@ -3,14 +3,9 @@
 # to get fastest path
 #by Bryan Perez
 
-import objectsPosition
 
-position= objectsPosition.Position(10,5)
+from objectsPosition import Position
 
-position.down()
-
-
-
-
-
-
+class path(object):
+    def __init__(self):
+        super().__init__()

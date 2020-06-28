@@ -37,7 +37,8 @@ def main():
                     rec.setFill('black')
                     rec.draw(win)
 
-
+    #increment is to make sure there is only one start and end point
+    increment=1 
     # while loop to keep program running
     while win.isOpen():
         print("runnning game") 
@@ -52,15 +53,34 @@ def main():
         print(j)
         print(i)
         if coordinate != None:
-            '''making wall'''
-            if gameboard[i][j]>3:
-                gameboard[i][j]=0
-            gameboard[i][j]+=1
+            #if starting point is clicked finder will start to find fastest path
+            if gameboard[i][j]==1 and increment>2:
+                print("find end")
+            #if start and end point havent been click 
+            if increment<3:
+                if gameboard[i][j]!=1:
+                    gameboard[i][j]=increment
+                    increment+=1
+            else:
+                #create wall if wall clicked than make it empty
+                if gameboard[i][j]==3:
+                    gameboard[i][j]=0
+                else:
+                    if gameboard[i][j]==0:
+                        gameboard[i][j]=3
+            #fill in boxes dependent on array value empty(0), start(1),end(2),wall(3)
+            if gameboard[i][j]==0:
+                startingPosition=objectsPosition.Position(i,j)
+                rec=Rectangle(Point(0+(block_size*j),0+(block_size*i)),Point(block_size+(block_size*j),block_size+(block_size*i)))
+                rec.setFill('white')
+                rec.draw(win)
             if gameboard[i][j]==1:
+                startingPosition=objectsPosition.Position(i,j)
                 rec=Rectangle(Point(0+(block_size*j),0+(block_size*i)),Point(block_size+(block_size*j),block_size+(block_size*i)))
                 rec.setFill('green')
                 rec.draw(win)
             if gameboard[i][j]==2:
+                endPostion=objectsPosition.Position(i,j)
                 rec=Rectangle(Point(0+(block_size*j),0+(block_size*i)),Point(block_size+(block_size*j),block_size+(block_size*i)))
                 rec.setFill('red')
                 rec.draw(win)

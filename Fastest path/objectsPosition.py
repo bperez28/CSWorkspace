@@ -7,6 +7,12 @@ class Position(object):
     def __init__(self,x,y):
         self.x = x
         self.y=y
+    def __repr__(self):
+        return "<Test a:%s b:%s>" % (self.x, self.y)
+
+    def __str__(self):
+        return "From str method of Test: x is %s, y is %s" % (self.x, self.y)
+        
     def get_x(self):
         return self.x
     def get_y(self):

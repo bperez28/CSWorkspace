@@ -39,6 +39,8 @@ def main():
 
     #increment is to make sure there is only one start and end point
     increment=1 
+    startingPosition=objectsPosition.Position(0,0)
+    endPosition=objectsPosition.Position(0,0)
     # while loop to keep program running
     while win.isOpen():
         print("runnning game") 
@@ -55,7 +57,9 @@ def main():
         if coordinate != None:
             #if starting point is clicked finder will start to find fastest path
             if gameboard[i][j]==1 and increment>2:
+                path=finder.path(win,gameboard,startingPosition,endPosition)
                 print("find end")
+                
             #if start and end point havent been click 
             if increment<3:
                 if gameboard[i][j]!=1:
@@ -70,12 +74,14 @@ def main():
                         gameboard[i][j]=3
             #fill in boxes dependent on array value empty(0), start(1),end(2),wall(3)
             if gameboard[i][j]==0:
-                startingPosition=objectsPosition.Position(i,j)
+                startingPosition.set_x(i)
+                startingPosition.set_y(j)
                 rec=Rectangle(Point(0+(block_size*j),0+(block_size*i)),Point(block_size+(block_size*j),block_size+(block_size*i)))
                 rec.setFill('white')
                 rec.draw(win)
             if gameboard[i][j]==1:
-                startingPosition=objectsPosition.Position(i,j)
+                endPosition.set_x(i)
+                endPosition.set_y(j)
                 rec=Rectangle(Point(0+(block_size*j),0+(block_size*i)),Point(block_size+(block_size*j),block_size+(block_size*i)))
                 rec.setFill('green')
                 rec.draw(win)

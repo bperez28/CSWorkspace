@@ -9,24 +9,25 @@ from graphics import *
 
 class path(object):
     steps=[]
-    def __init__(self,win,gameboard,startpoint,endpoint):
+    def __init__(self,win,gameboard,startingPosition,endPosition):
         self.win=win
         self.gameboard=gameboard
-        self.startpoint=startpoint
-        self.endpoint=endpoint
-    def setGameboard(self,array):
-        self.gameboard=array
-    def getGameboard(self):
-        return self.gameboard
-    def setStartpoint(self,x,y):
-        self.startpoint=Position(x,y)
+        self.startingPosition=startingPosition
+        self.endPosition=endPosition
+        self.block_size=20
     def getStartpoint(self):
         return self.startpoint
-    def setEndpoint(self,x,y):
-        self.endpoint=Position(x,y)
     def getEndpoint(self):
         return self.endpoint 
-
-
-       
-     
+    def pathFinder(self):
+        #printing block down starting point
+        found=0
+        while found==0:
+            print(self.startingPosition)
+            j=self.startingPosition.get_x()
+            i=self.startingPosition.get_y()+1
+            if self.gameboard[i][j]==0:
+                rec=Rectangle(Point(0+(self.block_size*j),0+(self.block_size*i)),Point(self.block_size+(self.block_size*j),self.block_size+(self.block_size*i)))
+                rec.setFill('blue')
+                rec.draw(self.win) 
+            found=1

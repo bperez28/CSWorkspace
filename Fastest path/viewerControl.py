@@ -57,7 +57,8 @@ def main():
             #if starting point is clicked finder will start to find fastest path
             if gameboard[i][j]==1 and increment>2:
                 path=finder.path(win,gameboard,startingPosition,endPosition)
-                path.pathFinder()
+                path.pathFinder(startingPosition)
+                # path.pathFinder(startingPosition)
                 print("find end")
                 
             #if start and end point havent been click 
